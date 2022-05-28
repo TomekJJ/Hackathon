@@ -14,7 +14,7 @@ def print_emtpy_pass(pswrd):
     empty_pswrd = pswrd_len * '_'
     print()
     print(f'**** Hasło składa się z {pswrd_len} liter ****')
-    print(list(empty_pswrd))
+    print(*list(empty_pswrd))
     return list(empty_pswrd)
 
 
@@ -63,7 +63,9 @@ def main():
             if guess == True:
                 break
             elif guess == False and proba == n-1:
+                print()
                 print("Przegrałeś, spróbuj jeszcze raz!")
+                print(f'Odgadywanym słowem było "{pswrd}"')
                 break
 
         elif choice == "n":
@@ -72,12 +74,14 @@ def main():
                 break
             else:
                 find_letter(pswrd, ingame_pswrd)
-        ## elif: jak kontrolować błędną odpowiedć użytkowniką wśrodku pętli for ????
+        # else:
+        #     print("Nie ma takiej opcji")
+        #     n += 1
 
-
-
-        if proba == n:
+        if proba == n - 1:
+            print()
             print("Przegrałeś, spróbuj jeszcze raz!")
+            print(f'Odgadywanym słowem było "{pswrd}"')
             break
 
 
