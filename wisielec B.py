@@ -52,7 +52,6 @@ def guess_full_pswrd(pswrd):
         print("**** Brawo odgadłeś całe hasło !!! ****")
     else:
         print("Podane hasło jest błędne")
-        print('ug w funkcji', user_guess)
     return user_guess
 
 
@@ -67,15 +66,17 @@ def main():
 
     ingame_pswrd = print_emtpy_pass(pswrd)
 
-    while proba < n:
+    while proba <= n:
         print()
         print(f'***** Próba {proba} *****')
         choice = choice_todo()
 
         if choice == "t":
             guess_full_pswrd(pswrd)
+            proba = proba + 1
         elif choice == "n":
             find_letter(pswrd, ingame_pswrd)
+            proba = proba + 1
 
 
     # koniec gry - użytkownik odgadł hasło
@@ -91,7 +92,7 @@ def main():
             break
 
     # koniec gry - za dużo prób
-        if proba == n - 1:
+        if proba == n + 1:
             print()
             print("Przegrałeś, spróbuj jeszcze raz!")
             print(f'Odgadywanym słowem było "{pswrd}"')
