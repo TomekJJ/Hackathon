@@ -46,12 +46,11 @@ def choice_todo():
 
 
 def guess_full_pswrd(pswrd):
-
     user_guess = input("Podaj hasło -->")
-    if user_guess == pswrd:
-        print("**** Brawo odgadłeś całe hasło !!! ****")
-    else:
-        print("Podane hasło jest błędne")
+    # if user_guess == pswrd:
+    #     print("**** Brawo odgadłeś całe hasło !!! ****")
+    # else:
+    #     print("Podane hasło jest błędne")
     return user_guess
 
 
@@ -59,9 +58,9 @@ def main():
     n = 4
     # n = int(input("Wybierz stopień trudności (liczba prób od 3 do 10) --> ")) + 1
     proba = 1
-    user_guess = []
+    guess = None
 
-
+    # losowanie hasła i pierwszy wybór
     pswrd = losuj_haslo()
 
     ingame_pswrd = print_emtpy_pass(pswrd)
@@ -69,18 +68,26 @@ def main():
     while proba <= n:
         print()
         print(f'***** Próba {proba} *****')
+
+    # Decyzja hasło czy litera
         choice = choice_todo()
 
         if choice == "t":
-            guess_full_pswrd(pswrd)
-            proba = proba + 1
+            guess = guess_full_pswrd(pswrd)
+            if guess == pswrd:
+                print("**** Brawo odgadłeś całe hasło !!! ****")
+                break
+            else:
+                print("Podane hasło jest błędne")
+                proba = proba + 1
+
         elif choice == "n":
             find_letter(pswrd, ingame_pswrd)
             proba = proba + 1
 
 
     # koniec gry - użytkownik odgadł hasło
-        if user_guess == pswrd:                         # <------- tutaj coś nie gra
+        if guess == list(pswrd):                         # <------- tutaj coś nie gra
             print()
             print("Brawo. Odgadłeś hasło!")
             break
