@@ -14,7 +14,7 @@ def print_emtpy_pass(pswrd):
     empty_pswrd = pswrd_len * '_'
     print()
     print(f'**** Hasło składa się z {pswrd_len} liter ****')
-    print(*list(empty_pswrd))
+    print(list(empty_pswrd))
     return list(empty_pswrd)
 
 

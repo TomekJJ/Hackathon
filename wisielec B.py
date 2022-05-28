@@ -1,6 +1,6 @@
 import random
 
-ZBIOR_HASEL = ["Tommek", "mmichal", "Ania", "oola", "hhenio", "kaazio"]
+ZBIOR_HASEL = ["tomm", "mmic", "ania", "oola", "hhen", "kaaz"]
 
 
 def losuj_haslo():
@@ -27,57 +27,71 @@ def find_letter(pswrd, ingame_pswrd):
             if letter == v:
                 ingame_pswrd[i] = letter
         print("Podana litera znajduje się w haśle:")
-        print(ingame_pswrd)
+        print(*list(ingame_pswrd))
         return ingame_pswrd
     else:
         print("W haśle nie ma takiej litery")
-        print(ingame_pswrd)
+        print(*list(ingame_pswrd))
         return ingame_pswrd
 
 
-def guess_full_pswrd(pswrd):
-    user_guess = input("Podaj hasło -->")
+def choice_todo():
+    while True:
+        choice = str(input("Czy chcesz odgadnąć całe hasło (t/n)? -->"))
+        if choice == "t" or choice == "n":
+           break
+        else:
+            print("Błędny wybór. Spróbuj jeszcze raz")
+    return choice
 
+
+def guess_full_pswrd(pswrd):
+
+    user_guess = input("Podaj hasło -->")
     if user_guess == pswrd:
-        print("**** Brawo wygrałeś !!! ****")
+        print("**** Brawo odgadłeś całe hasło !!! ****")
     else:
         print("Podane hasło jest błędne")
-
-    return user_guess == pswrd
-
+        print ('ug w funkcji', user_guess)
+    return user_guess
 
 def main():
-    n = int(input("Wybierz stopień trudności (liczba prób od 3 do 10) --> ")) + 1
+    n = 6
+    proba = 1
+    user_guess = [ ]
+    # n = int(input("Wybierz stopień trudności (liczba prób od 3 do 10) --> ")) + 1
 
     pswrd = losuj_haslo()
 
     ingame_pswrd = print_emtpy_pass(pswrd)
 
-    for proba in range(1, n):
+    while proba < n:
         print()
         print(f'***** Próba {proba} *****')
-        choice = input("Czy chcesz odgadnąć całe hasło (t/n)? -->")
+        choice = choice_todo()
 
         if choice == "t":
-            guess = guess_full_pswrd(pswrd)
-            if guess == True:
-                break
-            elif guess == False and proba == n-1:
-                print()
-                print("Przegrałeś, spróbuj jeszcze raz!")
-                print(f'Odgadywanym słowem było "{pswrd}"')
-                break
-
+            guess_full_pswrd(pswrd)
+            proba = proba + 1
         elif choice == "n":
-            if ingame_pswrd == list(pswrd):
-                print("Brawo wygrałeś")
-                break
-            else:
-                find_letter(pswrd, ingame_pswrd)
-        # else:
-        #     print("Nie ma takiej opcji")
-        #     n += 1
+            find_letter(pswrd, ingame_pswrd)
+            proba = proba + 1
+        else:
+            proba = proba
 
+    # koniec gry - użytkownik odgadł hasło
+    #     if guess_full_pswrd(pswrd) == pswrd:
+    #         print()
+    #         print("Brawo. Odgadłeś hasło!")
+    #         break
+
+    # koniec gry - użytkownik odgadł wszystkie litery
+        if ingame_pswrd == list(pswrd):
+            print()
+            print("Brawo. Ogadłeś wszystkie litery!")
+            break
+
+    # koniec gry - za dużo prób
         if proba == n - 1:
             print()
             print("Przegrałeś, spróbuj jeszcze raz!")
