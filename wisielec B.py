@@ -47,10 +47,10 @@ def choice_todo():
 
 def guess_full_pswrd(pswrd):
     user_guess = input("Podaj hasło -->")
-    # if user_guess == pswrd:
-    #     print("**** Brawo odgadłeś całe hasło !!! ****")
-    # else:
-    #     print("Podane hasło jest błędne")
+    if user_guess == pswrd:
+        print("**** Brawo odgadłeś całe hasło !!! ****")
+    else:
+        print("Podane hasło jest błędne")
     return user_guess
 
 
@@ -74,17 +74,16 @@ def main():
 
         if choice == "t":
             guess = guess_full_pswrd(pswrd)
-            if guess == pswrd:
-                print("**** Brawo odgadłeś całe hasło !!! ****")
-                break
-            else:
-                print("Podane hasło jest błędne")
-                proba = proba + 1
+            # if guess == pswrd:
+            #     print("**** Brawo odgadłeś całe hasło !!! ****")
+            #     break
+            # else:
+            #     print("Podane hasło jest błędne")
+            proba = proba + 1
 
         elif choice == "n":
             find_letter(pswrd, ingame_pswrd)
             proba = proba + 1
-
 
     # koniec gry - użytkownik odgadł hasło
         if guess == list(pswrd):                         # <------- tutaj coś nie gra
