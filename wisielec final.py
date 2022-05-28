@@ -38,7 +38,7 @@ def find_letter(pswrd, ingame_pswrd):
 
 def choice_todo():
     while True:
-        choice = (str(input("Czy chcesz odgadnąć całe hasło (t/n)? -->"))).lower()
+        choice = str(input("Czy chcesz odgadnąć całe hasło (t/n)? -->")).lower()
         if choice == "t" or choice == "n":
             break
         else:
@@ -50,14 +50,14 @@ def guess_full_pswrd(pswrd):
     user_guess = input("Podaj hasło -->").lower()
     if user_guess == pswrd:
         print("**** Brawo odgadłeś całe hasło !!! ****")
-        sys.exit()
+        sys.exit()  # Koniec gry - użytkownik odgadł hasło
     else:
         print("Podane hasło jest błędne")
     return user_guess
 
 
 def main():
-    n = int(input("Wybierz stopień trudności (liczba prób od 3 do 10) --> ")) + 1
+    n = int(input("Wybierz stopień trudności (liczba prób) --> ")) + 1
     proba = 1
     guess = None
 
@@ -74,22 +74,11 @@ def main():
         choice = choice_todo()
         if choice == "t":
             guess = guess_full_pswrd(pswrd)
-            # if guess == pswrd:
-            #     print("**** Brawo odgadłeś całe hasło !!! ****")
-            #     break
-            # else:
-            #     print("Podane hasło jest błędne")
             proba = proba + 1
 
         elif choice == "n":
             find_letter(pswrd, ingame_pswrd)
             proba = proba + 1
-
-    # koniec gry - użytkownik odgadł hasło
-        if guess == pswrd:                         # <------- tutaj coś nie gra
-            print()
-            print("Brawo. Odgadłeś hasło!")
-            break
 
     # koniec gry - użytkownik odgadł wszystkie litery
         if ingame_pswrd == list(pswrd):
